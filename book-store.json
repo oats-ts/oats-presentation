@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BookStore",
+    "version": "2.0"
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "required": ["id", "title", "author", "price"],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "AppError": {
+        "type": "object",
+        "required": ["message"],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/books": {
+      "get": {
+        "operationId": "getBooks",
+        "description": "Returns a list of books, can be paginated",
+        "parameters": [
+          {
+            "name": "offset",
+            "style": "form",
+            "in": "query",
+            "description": "Parameter used for pagination, the index of the first record",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "x-limit",
+            "style": "simple",
+            "in": "header",
+            "description": "Parameter used for pagination, the amount of records you need",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The book list",
+            "headers": {
+              "x-length": {
+                "style": "simple",
+                "description": "The number of records returned",
+                "required": true,
+                "schema": {
+                  "type": "number"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error caused by either the client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppError"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error caused by either the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "addBook",
+        "description": "Creates a new book based on the request body.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The book created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error caused by either the client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppError"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error caused by either the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}": {
+      "get": {
+        "operationId": "getBook",
+        "description": "Returns the book associated with the given bookId",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bookId",
+            "description": "The id of the book",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a book identified by it's id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "An error caused by either the client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppError"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error caused by either the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

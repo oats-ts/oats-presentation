@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "oats": "node ./oats.js",
+    "test": "jest",
+    "start": "ts-node ./src/index.ts"
+  },
+  "dependencies": {
+    "@oats-ts/openapi-express-server-adapter": "0.0.47",
+    "@oats-ts/openapi-fetch-client-adapter": "0.0.47",
+    "@oats-ts/openapi-runtime": "0.0.47",
+    "express": "4.18.2",
+    "ts-node": "10.9.1"
+  },
+  "devDependencies": {
+    "@oats-ts/openapi": "0.0.47",
+    "@types/jest": "29.2.3",
+    "http-terminator": "3.2.0",
+    "jest": "29.3.1",
+    "ts-jest": "29.0.3"
+  }
+}
