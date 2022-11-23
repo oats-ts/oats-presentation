@@ -1,6 +1,6 @@
 # Oats demo - BudapestJS 2022 November
 
-https://oats-ts.github.io/docs
+More info and documentation: https://oats-ts.github.io/docs
 
 ## Generating
 
