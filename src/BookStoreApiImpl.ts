@@ -1,5 +1,4 @@
-import { Failure } from '@oats-ts/openapi-runtime'
-import { isSuccess } from '@oats-ts/try'
+import { Failure, isSuccess } from '@oats-ts/openapi-runtime'
 import { BookStoreApi } from './generated/api/BookStoreApi'
 import { AddBookServerRequest } from './generated/requests/AddBookServerRequest'
 import { GetBookServerRequest } from './generated/requests/GetBookServerRequest'
