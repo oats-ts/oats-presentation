@@ -16,7 +16,7 @@ describe('Book store', () => {
     })
   })
 
-  afterEach(async () => terminator.terminate())
+  afterAll(async () => terminator.terminate())
 
   it('should be able to create a book and then query it', async () => {
     // Create a new Book
