@@ -22,14 +22,6 @@ export class BookStoreApiImpl implements BookStoreApi {
     },
   ]
 
-  private failureToAppErrors(failure: Failure): AppError[] {
-    return failure.issues.map(
-      (issue): AppError => ({
-        message: `${issue.severity} in ${issue.path}: ${issue.message}`,
-      }),
-    )
-  }
-
   async getBooks(_request: GetBooksServerRequest): Promise<GetBooksResponse> {
     return {
       statusCode: 200,
@@ -81,5 +73,13 @@ export class BookStoreApiImpl implements BookStoreApi {
       mimeType: 'application/json',
       body: this.failureToAppErrors(request.path),
     }
+  }
+
+  private failureToAppErrors(failure: Failure): AppError[] {
+    return failure.issues.map(
+      (issue): AppError => ({
+        message: `${issue.severity} in ${issue.path}: ${issue.message}`,
+      }),
+    )
   }
 }
